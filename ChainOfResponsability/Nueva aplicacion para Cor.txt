@@ -1,0 +1,59 @@
+Si yo quisiera hacer darle una aplicacion a este patron , se me ocurre el ejemplo de una 
+empresa consultora , donde yo tengo una lista de tareas que el cliente necesita.
+y pregunto a mi lista (o sublista) de afiliados (trabajadores) quien puede hacer la tarea.
+
+Ejemplo:
+
+Cliente (Planos,Casa,Agua,Electricidad,Comida)
+
+Recordar que
+Uno no tiene una "sublista" , sino tiene una "direccion" que "segun" como se haya armado o encadenado todo,
+podra cumplir todos los requisitos o no.
+
+Ejemplo: Encadeno "Arquitecto,Albañil,Promero,Electricista,Chef"
+ Si ahora "ConsultarListaDesde(Arquitecto)" Dara 5/5 
+	si ahora "Consultar..(Plomero)" Dara solo 3/5 y 2 fallaran.
+
+¿Porque? , porque se "creo" o se propuso una "cadena" que estaba ordenada pero comenzo de una posicion mal
+
+Ahora , que pasa si tuviera todos mis trabajadores desordenados?. 
+La respuesta seria que: Mientras siempre comienzes desde el inicio (Aseguras que pase por todos) 
+Corres menos riesgo a equivocarte , porque importa como armas la cadena y desde donde queres comenzar a "recorrerla" 
+
+La manera "Facil" de programar esto es:
+
+1) Crear una interfaz con 2 elementos (de cajon)
+	-Metodo que devuelve elementos de la misma interfaz con un nombre que indice "SiguienteEnLaLista" (o parecido)
+	 y que tome como argumentos , un tipo de esta misma interfaz 
+		Ej: IConsulta NextInList(IConsulta mynext)
+	-Metodo que devuelve un "object" (Depende que tipo de solicitud haga el cliente, para nosotros creo es un tipo 			elemento de lista de string ) con argumento que devuelve un object 
+		Ej: object Consulta (object solicitud)
+
+2) Una clase abstracta AbstractConsultor que sera Padre de las clases que se van a instanciar como "Ayudadores" o "Consultores" 
+	(Albañil , arquitecto , etc..) de cajon va a heredar la interfaz de en 1)( osea Implementar metodos de esa I)
+		+ una variable privada del tipo de la <I> (Esta se va a referenciar con los nuevos metodos creados de -> <I>)
+	Tienen una estructura que creo no se cambia mucho
+
+3) Clases "Consultoras" que van a heredar de 2) y reescribir el metodo de "Consulta" segun su esencia
+	(Digo , el albañil esperara una solicitud tipo "Casa" y no "Agua" que le tocaria a plomero)
+
+4) Crear el cliente con todas las solicitudes 
+	Para este ejemplo, solo hay que hacer un metodo que reciba como parametro un "ayudador" (AbstractConsultor con)
+	y a ese "con" enviarle todas las solicitudes, creadas en el mismo cliente (son string) , se puede hacer una por una
+		Ej: con.Consulta(casa); con.Consulta(Agua);..etc
+		Ej 2: foreach(string food in new List<string> {casa,Agua,Electricidad,...etc}){
+				object resultado = con.Consulta(food)
+				Si (resultado != null){ mostrar }
+					Sino{ mostrar que no existe o no se encontro}
+			}
+
+5) Crear todo y conectarlo desde el "main" 
+
+(Ampliar 4 y 5 , me dio paja seguir) 
+
+
+
+
+
+
+
