@@ -1,5 +1,4 @@
 ﻿using System;
-
 /*
 El patron permite ampliacion porque, crear nuevas funciones solo requiere
 Crear una nueva clase que implemente IVisitor , gracias a la relacion entre las clases
@@ -7,7 +6,6 @@ que hacen al patron.
 Crear una clase Visitante consta de crear un metodo para cada clase que va a implementar
 el metodo. 
  */ 
-
 namespace Visitor
 {
 
@@ -16,6 +14,8 @@ namespace Visitor
         void Visit(Enemigo enemigo);
         void Visit(Aliado aliado);
     }
+    // Se implemento como clase abstracta aunque podria ser una interfaz
+    // que de hecho es mejor practica. 
     public abstract class Personaje
     {
         public abstract void Accept(IVisitor visitor);
