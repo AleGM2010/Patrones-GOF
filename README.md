@@ -1,1 +1,1 @@
-# Quark-patrones
+# Patrones de Diseño 
